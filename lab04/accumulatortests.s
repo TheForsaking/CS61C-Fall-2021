@@ -15,7 +15,7 @@ TestFailed: .asciiz "Test Failed!"
 #The main function currently runs a simple test that checks if accumulator works on the given input array. All versions of accumulate should pass this.
 #Modify the test so that you can catch the bugs in four of the five solutions!
 main:
-	la a0 inputarray
+    la a0 inputarray
     jal accumulatorone
     li t0 28
     beq a0 t0 Pass

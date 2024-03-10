@@ -27,21 +27,21 @@ main:
     jal ra, print_list
     jal ra, print_newline
 
-    # === Calling `map(head, &increment)` ===
-    # Because our `map` function modifies the list in-place, the increment takes place after
+    # === Calling `map(head, &decrement)` ===
+    # Because our `map` function modifies the list in-place, the decrement takes place after
     # the square does
 
     # Load function arguments
     add a0, s0, x0 # Loads the address of the first node into a0
-    
-    # Load the addres of the "increment" function into a1 (should be very similar to before)
+
+    # Load the address of the "decrement" function into a1 (should be very similar to before)
     ### YOUR CODE HERE ###
 
 
     # Issue the call to map
     jal ra, map
 
-    # Print incremented list
+    # Print decremented list
     add a0, s0, x0
     jal ra, print_list
     jal ra, print_newline
@@ -96,9 +96,9 @@ square:
     mul a0, a0, a0
     jr ra
 
-# === Definition of the "increment" function ===
-increment:
-    addi a0, a0, 1
+# === Definition of the "decrement" function ===
+decrement:
+    addi a0, a0, -1
     jr ra
 
 # === Helper functions ===

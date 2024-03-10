@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<project source="3.4.3-61c.7ae7f66" version="1.0">
+<project source="3.4.3-61c.cc0f4a6" version="1.0">
   This file is intended to be loaded by Logisim-evolution (https://github.com/reds-heig/logisim-evolution).
 
   <lib desc="#Wiring" name="0">
     <tool name="Splitter">
       <a name="appear" val="center"/>
+      <a name="facing" val="west"/>
     </tool>
     <tool name="Pin">
       <a name="facing" val="north"/>
@@ -108,6 +109,7 @@
     <sep/>
     <tool lib="0" name="Pin">
       <a name="appearance" val="NewPins"/>
+      <a name="facing" val="west"/>
     </tool>
     <tool lib="0" name="Pin">
       <a name="appearance" val="NewPins"/>
@@ -137,10 +139,9 @@
     <a name="clabel" val=""/>
     <a name="clabelfont" val="SansSerif bold 16"/>
     <a name="clabelup" val="east"/>
-    <comp lib="0" loc="(100,440)" name="Tunnel">
+    <comp lib="0" loc="(100,320)" name="Tunnel">
       <a name="facing" val="east"/>
-      <a name="label" val="SPLIT_IN"/>
-      <a name="width" val="8"/>
+      <a name="label" val="FSM_IN"/>
     </comp>
     <comp lib="0" loc="(110,140)" name="Clock"/>
     <comp lib="0" loc="(190,100)" name="Pin">
@@ -149,7 +150,7 @@
       <a name="label" val="CYCLE"/>
       <a name="locked" val="true"/>
       <a name="output" val="true"/>
-      <a name="width" val="2"/>
+      <a name="width" val="3"/>
     </comp>
     <comp lib="0" loc="(190,50)" name="Pin">
       <a name="appearance" val="NewPins"/>
@@ -158,61 +159,52 @@
       <a name="locked" val="true"/>
       <a name="output" val="true"/>
     </comp>
-    <comp lib="0" loc="(480,210)" name="Tunnel">
+    <comp lib="0" loc="(450,220)" name="Tunnel">
       <a name="facing" val="south"/>
-      <a name="label" val="SPLIT_IN"/>
-      <a name="width" val="8"/>
+      <a name="label" val="FSM_IN"/>
     </comp>
-    <comp lib="0" loc="(500,220)" name="Pin">
+    <comp lib="0" loc="(480,230)" name="Pin">
       <a name="appearance" val="NewPins"/>
       <a name="facing" val="west"/>
-      <a name="label" val="SPLIT_IN"/>
-      <a name="locked" val="true"/>
-      <a name="output" val="true"/>
-      <a name="width" val="8"/>
-    </comp>
-    <comp lib="0" loc="(500,430)" name="Pin">
-      <a name="appearance" val="NewPins"/>
-      <a name="facing" val="west"/>
-      <a name="label" val="SPLIT_OUT0"/>
+      <a name="label" val="FSM_IN"/>
       <a name="locked" val="true"/>
       <a name="output" val="true"/>
     </comp>
-    <comp lib="0" loc="(500,470)" name="Pin">
+    <comp lib="0" loc="(480,320)" name="Pin">
       <a name="appearance" val="NewPins"/>
       <a name="facing" val="west"/>
-      <a name="label" val="SPLIT_OUT1"/>
+      <a name="label" val="FSM_OUT"/>
       <a name="locked" val="true"/>
       <a name="output" val="true"/>
-      <a name="width" val="8"/>
     </comp>
     <comp lib="0" loc="(60,110)" name="Constant">
-      <a name="width" val="2"/>
+      <a name="width" val="3"/>
     </comp>
     <comp lib="0" loc="(60,40)" name="Constant">
-      <a name="value" val="0x3"/>
-      <a name="width" val="2"/>
+      <a name="value" val="0x7"/>
+      <a name="width" val="3"/>
     </comp>
     <comp lib="3" loc="(100,100)" name="Adder">
-      <a name="width" val="2"/>
+      <a name="width" val="3"/>
     </comp>
     <comp lib="3" loc="(100,50)" name="Comparator">
-      <a name="width" val="2"/>
+      <a name="width" val="3"/>
     </comp>
     <comp lib="4" loc="(110,70)" name="Register">
       <a name="appearance" val="logisim_evolution"/>
-      <a name="width" val="2"/>
+      <a name="width" val="3"/>
     </comp>
     <comp lib="4" loc="(190,160)" name="ROM">
-      <a name="addrWidth" val="2"/>
+      <a name="addrWidth" val="3"/>
       <a name="appearance" val="logisim_evolution"/>
-      <a name="contents">addr/data: 2 8
-1 82 a1 5a
+      <a name="contents">addr/data: 3 1
+0 1 0 1 1 0 1
 </a>
+      <a name="dataWidth" val="1"/>
     </comp>
-    <comp lib="6" loc="(410,440)" name="SplitThing"/>
+    <comp lib="6" loc="(400,320)" name="FSM"/>
     <wire from="(100,100)" to="(110,100)"/>
-    <wire from="(100,440)" to="(190,440)"/>
+    <wire from="(100,320)" to="(180,320)"/>
     <wire from="(100,50)" to="(190,50)"/>
     <wire from="(170,100)" to="(180,100)"/>
     <wire from="(180,100)" to="(180,170)"/>
@@ -223,14 +215,9 @@
     <wire from="(30,60)" to="(60,60)"/>
     <wire from="(30,90)" to="(30,170)"/>
     <wire from="(30,90)" to="(60,90)"/>
-    <wire from="(410,440)" to="(490,440)"/>
-    <wire from="(410,460)" to="(490,460)"/>
-    <wire from="(430,220)" to="(480,220)"/>
-    <wire from="(480,210)" to="(480,220)"/>
-    <wire from="(480,220)" to="(500,220)"/>
-    <wire from="(490,430)" to="(490,440)"/>
-    <wire from="(490,430)" to="(500,430)"/>
-    <wire from="(490,460)" to="(490,470)"/>
-    <wire from="(490,470)" to="(500,470)"/>
+    <wire from="(400,320)" to="(480,320)"/>
+    <wire from="(430,230)" to="(450,230)"/>
+    <wire from="(450,220)" to="(450,230)"/>
+    <wire from="(450,230)" to="(480,230)"/>
   </circuit>
 </project>

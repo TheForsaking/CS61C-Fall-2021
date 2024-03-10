@@ -10,10 +10,10 @@ import traceback
 
 lab_dir_path = os.getcwd()
 tests_dir_path = os.path.join(os.getcwd(), "tests")
-logisim_path = os.path.join(os.getcwd(),"..", "tools", "logisim")
+logisim_path = os.path.join(os.getcwd(),"..", "tools", "logisim-evolution.jar")
 
-logisim_env = os.environ.copy()
-logisim_env["CS61C_TOOLS_ARGS"] = logisim_env.get("CS61C_TOOLS_ARGS", "") + " -q"
+# logisim_env = os.environ.copy()
+# logisim_env["CS61C_TOOLS_ARGS"] = logisim_env.get("CS61C_TOOLS_ARGS", "") + " -q"
 
 class TestCase():
   """
@@ -54,7 +54,7 @@ class TestCase():
     try:
       self.fix_circ()
 
-      proc = subprocess.Popen([sys.executable, logisim_path, "-tty", "table,binary,tabs", self.get_circ_path()], stdout=subprocess.PIPE, env=logisim_env)
+      proc = subprocess.Popen(["java", "-jar", logisim_path, "-tty", "table,binary,tabs", self.get_circ_path()], stdout=subprocess.PIPE)
 
       with open(self.get_expected_table_path(), "r") as reference:
         passed = self.check_output(proc.stdout, reference)

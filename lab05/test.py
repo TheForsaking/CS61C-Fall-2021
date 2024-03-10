@@ -10,10 +10,10 @@ import traceback
 
 lab_dir_path = os.getcwd()
 tests_dir_path = os.path.join(os.getcwd(), "tests")
-logisim_path = os.path.join(os.getcwd(),"..", "tools", "logisim")
+logisim_path = os.path.join(os.getcwd(),"..", "tools", "logisim-evolution.jar")
 
-logisim_env = os.environ.copy()
-logisim_env["CS61C_TOOLS_ARGS"] = logisim_env.get("CS61C_TOOLS_ARGS", "") + " -q"
+# logisim_env = os.environ.copy()
+# logisim_env["CS61C_TOOLS_ARGS"] = logisim_env.get("CS61C_TOOLS_ARGS", "") + " -q"
 
 class TestCase():
   """
@@ -54,7 +54,7 @@ class TestCase():
     try:
       self.fix_circ()
 
-      proc = subprocess.Popen([sys.executable, logisim_path, "-tty", "table,binary,tabs", self.get_circ_path()], stdout=subprocess.PIPE, env=logisim_env)
+      proc = subprocess.Popen(["java", "-jar", logisim_path, "-tty", "table,binary,tabs", self.get_circ_path()], stdout=subprocess.PIPE)
 
       with open(self.get_expected_table_path(), "r") as reference:
         passed = self.check_output(proc.stdout, reference)
@@ -105,11 +105,12 @@ def kill_proc(proc):
 
 
 tests = [
-  TestCase("ex1", "Exercise 1: Sub-Circuits"),
-  TestCase("ex2", "Exercise 2: Add Machine"),
-  TestCase("ex3", "Exercise 3: FSM"),
-  TestCase("ex4", "Exercise 4: Splitter"),
-  TestCase("ex5", "Exercise 5: Rotate"),
+  TestCase("ex2", "Exercise 2: Sub-Circuits"),
+  TestCase("ex3", "Exercise 3: Add Machine"),
+  TestCase("ex4", "Exercise 4: FSM"),
+  TestCase("ex5", "Exercise 5: Splitter"),
+  TestCase("ex6", "Exercise 6: Rotate"),
+  TestCase("ex7", "Exercise 7: Buggy Traffic Lights")
 ]
 
 def run_tests(tests):

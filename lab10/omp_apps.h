@@ -1,6 +1,6 @@
 
-#ifndef COMPUTE_DOTP_H
-#define COMPUTE_DOTP_H
+#ifndef OMP_APPS_H
+#define OMP_APPS_H
 
 #include <math.h>
 #include <omp.h>
@@ -8,16 +8,10 @@
 #include <stdlib.h>
 #include <string.h>
 
-#include "libbmp/libbmp.h"
-
 #define REPEAT 60
 #define BUF_SIZE 8192
 
 #define ARRAY_SIZE 5000000
-
-// for web server
-char *compute_dotp(int);
-char *image_proc(const char*);
 
 void v_add_naive(double* x, double* y, double* z);
 void v_add_optimized_adjacent(double* x, double* y, double* z);
