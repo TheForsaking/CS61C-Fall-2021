@@ -7,12 +7,16 @@ int main(int argc, char **argv) {
     printf("Running tests...\n\n");
     /************ Part 1 Test Cases ************/
     char *str = "hello world!";
+    char *empty_str = "";
 
     int num_l = num_occurrences(str, 'l');
     assert(num_l == 3);
 
     int num_z = num_occurrences(str, 'z');
     assert(num_z == 0);
+
+    int num_b = num_occurrences(empty_str, 'b');
+    assert(num_b == 0);
 
     /* TODO: Think of a scenario that is not tested by the current test cases. Create one additional test case to test this scenario. */
 
@@ -34,6 +38,8 @@ int main(int argc, char **argv) {
     assert(dna_seq_2.C_count == 3);
     assert(dna_seq_2.G_count == 0);
     assert(dna_seq_2.T_count == 0);
+
+    compute_nucleotide_occurrences(NULL);
 
     /* TODO: Think of a scenario that is not tested by the current test cases. Create one additional test case to test this scenario. */
 
