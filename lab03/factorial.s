@@ -22,3 +22,20 @@ main:
 
 factorial:
     # YOUR CODE HERE
+
+    addi sp, sp, -4
+    sw s1, 0(sp)
+
+    add s1, x0, a0
+    li a0, 1
+loop:
+    beq s1, x0, exit  
+    mul a0, a0, s1
+    addi s1, s1, -1
+
+    j loop
+
+exit:
+    lw s1, 0(sp)
+    addi, sp, sp, 4
+    jr ra
