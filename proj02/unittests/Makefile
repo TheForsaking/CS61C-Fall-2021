@@ -21,6 +21,10 @@ test-partA:
 	${PYTHON} -m unittest unittests.TestArgmax -v
 	${PYTHON} -m unittest unittests.TestDot -v
 	${PYTHON} -m unittest unittests.TestMatmul -v
+	${PYTHON} -m unittest studenttests.TestSquaredLoss -v
+	${PYTHON} -m unittest studenttests.TestAbsLoss -v
+	${PYTHON} -m unittest studenttests.TestZeroOneLoss -v
+	${PYTHON} -m unittest studenttests.TestInitializeZero -v
 
 test-partB:
 	${PYTHON} -m unittest unittests.TestReadMatrix -v
