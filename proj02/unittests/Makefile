@@ -28,6 +28,18 @@ test-partB:
 	${PYTHON} -m unittest unittests.TestClassify -v
 	${PYTHON} -m unittest unittests.TestMain -v
 
+test-squaredloss:
+	${PYTHON} -m unittest studenttests.TestSquaredLoss -v
+
+test-absloss:
+	${PYTHON} -m unittest studenttests.TestAbsLoss -v
+
+test-zerooneloss:
+	${PYTHON} -m unittest studenttests.TestZeroOneLoss -v
+
+test-initializezero:
+	${PYTHON} -m unittest studenttests.TestInitializeZero -v
+
 test-abs:
 	${PYTHON} -m unittest unittests.TestAbs -v
 

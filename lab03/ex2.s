@@ -22,7 +22,7 @@ dest:
     .word   0
 
 .text
-# fun:                   # a0 = (a0 + 1) * (-a0);
+# fun:
 fun:
     addi t0, a0, 1
     sub t1, x0, a0
@@ -31,35 +31,35 @@ fun:
 
 main:
     # BEGIN PROLOGUE
-    addi sp, sp, -20   # sp -= 20;
-    sw s0, 0(sp)       # *sp = s0
-    sw s1, 4(sp)       # *(sp + 1) = s1
-    sw s2, 8(sp)       # *(sp + 2) = s2
-    sw s3, 12(sp)      # *(sp + 3) = s3
-    sw ra, 16(sp)      # *(sp + 4) = ra
+    addi sp, sp, -20
+    sw s0, 0(sp)
+    sw s1, 4(sp)
+    sw s2, 8(sp)
+    sw s3, 12(sp)
+    sw ra, 16(sp)
     # END PROLOGUE
-    addi t0, x0, 0     # t0 = 0
-    addi s0, x0, 0     # s0 = 0
-    la s1, source      # s1 = source
-    la s2, dest        # s2 = dest
+    addi t0, x0, 0
+    addi s0, x0, 0
+    la s1, source
+    la s2, dest
 loop:
-    slli s3, t0, 2     # s3 = t0 << 2;
-    add t1, s1, s3     # t1 = s1 + s3
-    lw t2, 0(t1)       # t2 = *t1
-    beq t2, x0, exit   # if (!t2) break;
-    add a0, x0, t2     # a0 = t2
-    addi sp, sp, -8    # sp -= 8
-    sw t0, 0(sp)       # *sp = t0
-    sw t2, 4(sp)       # *(sp + 1) = t2
-    jal fun            # a0 = (a0 + 1) * (-a0)
-    lw t0, 0(sp)       # t0 = *sp
-    lw t2, 4(sp)       # t2 = *(sp + 1)
-    addi sp, sp, 8     # sp += 8;
-    add t2, x0, a0     # t2 = a0
-    add t3, s2, s3     # t3 = s2 + s3
-    sw t2, 0(t3)       # *t3 = t2
-    add s0, s0, t2     # s0 += t2
-    addi t0, t0, 1     # t0++
+    slli s3, t0, 2
+    add t1, s1, s3
+    lw t2, 0(t1)
+    beq t2, x0, exit
+    add a0, x0, t2
+    addi sp, sp, -8
+    sw t0, 0(sp)
+    sw t2, 4(sp)
+    jal fun
+    lw t0, 0(sp)
+    lw t2, 4(sp)
+    addi sp, sp, 8
+    add t2, x0, a0
+    add t3, s2, s3
+    sw t2, 0(t3)
+    add s0, s0, t2
+    addi t0, t0, 1
     jal x0, loop       
 exit:
     add a0, x0, s0
