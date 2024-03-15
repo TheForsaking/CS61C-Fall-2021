@@ -272,6 +272,27 @@ class TestMatmul(TestCase):
         t.check_array(output_array, result)
         t.execute(code = code)
 
+    def test_d(self):
+        self.doMatmul(
+            [1, 2, 3, 4, 5, 6, 7, 8, 9], 3, 3,
+            [1, 1, 1], 3, 1,
+            [6, 15, 24]
+        )
+
+    def test_dd(self):
+        self.doMatmul(
+            [1, 2, 3, 4, 5, 6, 7, 8, 9], 3, 3,
+            [6, 15, 24], 3, 1,
+            [108, 243, 378]
+        )
+    
+    def test_ddd(self):
+        self.doMatmul(
+            [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12], 4, 3,
+            [5, 13, 67, 31, 57, 73, 17, 83, 11, 20, 4, 35, 63, 0, 18, 5, 22, 9], 3, 6,
+            [228, 179, 143, 86, 131, 170, 483, 467, 431, 254, 380, 521, 738, 755, 719, 422, 629, 872, 993, 1043, 1007, 590, 878, 1223]
+        )
+
     def test_standard(self):
         self.doMatmul(
             [1, 2, 3, 4, 5, 6, 7, 8, 9], 3, 3,

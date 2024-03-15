@@ -16,8 +16,7 @@ initialize_zero:
     jal malloc
     lw t1, 0(sp)
     addi sp, sp, 4
-    li a1, -1
-    beq a0, a1, exit_122
+    beq a0, x0, exit_122
 
     add t0, a0, x0
     slli t2, t1, 2
