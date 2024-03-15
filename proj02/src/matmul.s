@@ -32,66 +32,82 @@ matmul:
     blt a2, t0, matmul_exit_59
     blt a5, t0, matmul_exit_59
 
-    addi sp, sp, -16
+    # Prologue
+    addi sp, sp, -28
     sw s0, 0(sp)  # pointer of a
     sw s1, 4(sp)  # pointer of b
     sw s2, 8(sp)  # pointer of c
     sw s3, 12(sp) # delta of b
-    li t0, 0 # row of c
-    li t1, 0 # col of c
-    li t2, 0
+    sw s4, 16(sp) # height
+    sw s5, 20(sp) # width of a / height of b
+    sw s6, 24(sp) # width
+    sw s7, 28(sp) #
 
-    slli s3, a5, 2
-    # Prologue
+    mv s0, a0
+    mv s1, a3
+    mv s2, a6
+    mv s4, a1
+    mv s5, a2
+    mv s6, a5
+    mv s3, s6
+    slli s3, s3, 2
 
+    li t0, 0 # x
 outer_loop_start:
-    bge t0, a1, outer_loop_end
-
+    bge t0, s4, outer_loop_end
+    li t1, 0 # y
 inner_loop_start:
-    bge t1, a5, inner_loop_end
-    li t2, 0
+    bge t1, s6, inner_loop_end
+
+    li t3, 0
+    mv t4, t0
+    mul t4, t4, s5
+    slli t4, t4, 2
+    add t4, t4, s0
+
+    mv t5, t1
+    slli t5, t5, 2
+    add t5, t5, s1
+
     li t6, 0
-    mul s2, t0, a2
-    add s2, s2, t1
-    slli s2, s2, 2
-    add s2, s2, a6
+    li a4, 0
 
-    mul s0, t0, a2
-    slli s0, s0, 2
-    add s0, s0, a0
+ ab_loop_start:
+    bge t6, s5, ab_loop_end
 
-    slli s1, t1, 2
-    add s1, s1, a3
-ab_loop_start:
-    bge t2, a2, ab_loop_end
+    lw a1, 0(t4)
+    lw a2, 0(t5)
+    mul a3, a1, a2
+    add a4, a4, a3
 
-    lw t3, 0(s0)
-    lw t4, 0(s1)
-    mul t5, t3, t4
-    add t6, t6, t5
-
-    addi t2, t2, 1
-    addi s0, s0, 4
-    add s1, s1, s3
-    j ab_loop_start    
+    addi t4, t4, 4
+    add t5, t5, s3
+    addi t6, t6, 1
+    j ab_loop_start
 ab_loop_end:
-    sw t6, 0(s2)
+    sw a4, 0(s2)
     addi t1, t1, 1
+    addi s2, s2, 4
     j inner_loop_start
+
 inner_loop_end:
-    li t1, 0
     addi t0, t0, 1
     j outer_loop_start
 outer_loop_end:
-    # Epilogue
-    
 
+
+    # Epilogue
+    lw s6, 24(sp)
+    lw s5, 20(sp)
+    lw s4, 16(sp)
     lw s3, 12(sp)
     lw s2, 8(sp)
     lw s1, 4(sp)
     lw s0, 0(sp)
-    addi sp, sp, 16
+    addi sp, sp, 28
     ret
+
+
 
 matmul_exit_59:
     li a1, 59
